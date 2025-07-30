@@ -1,0 +1,90 @@
+@model SimpleWebApp.Models.TimezoneConverterViewModel
+@{
+    ViewData["Title"] = "Timezone Converter";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="display-4 text-center mb-4">Timezone Converter</h1>
+            <p class="text-center text-muted mb-4">Convert time between different timezones around the world</p>
+            
+            <form asp-action="ConvertTime" method="post" class="bg-light p-4 rounded shadow-sm">
+                <div asp-validation-summary="All" class="alert alert-danger" style="display: none;"></div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="SourceTimezone" class="form-label">From Timezone:</label>
+                        <select asp-for="SourceTimezone" class="form-select">
+                            <option value="">Select source timezone</option>
+                            @foreach (var timezone in Model.AvailableTimezones)
+                            {
+                                <option value="@timezone.Id">@timezone.DisplayName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="TargetTimezone" class="form-label">To Timezone:</label>
+                        <select asp-for="TargetTimezone" class="form-select">
+                            <option value="">Select target timezone</option>
+                            @foreach (var timezone in Model.AvailableTimezones)
+                            {
+                                <option value="@timezone.Id">@timezone.DisplayName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="SourceTime" class="form-label">Date & Time:</label>
+                        <input asp-for="SourceTime" type="datetime-local" class="form-control" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Converted Time:</label>
+                        <div class="form-control bg-white" style="min-height: 38px; display: flex; align-items: center;">
+                            @if (!string.IsNullOrEmpty(Model.ConvertedTimeString))
+                            {
+                                <strong class="text-primary">@Model.ConvertedTimeString</strong>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Select timezones and click convert</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-exchange-alt"></i> Convert Time
+                    </button>
+                </div>
+            </form>
+            
+            @if (!string.IsNullOrEmpty(Model.ConvertedTimeString))
+            {
+                <div class="alert alert-success mt-4 text-center">
+                    <h5>Conversion Result</h5>
+                    <p class="mb-0">
+                        <strong>@Model.SourceTime?.ToString("yyyy-MM-dd HH:mm:ss")</strong> 
+                        in <em>@Model.AvailableTimezones.FirstOrDefault(t => t.Id == Model.SourceTimezone)?.DisplayName</em>
+                        <br>is<br>
+                        <strong class="text-primary">@Model.ConvertedTimeString</strong> 
+                        in <em>@Model.AvailableTimezones.FirstOrDefault(t => t.Id == Model.TargetTimezone)?.DisplayName</em>
+                    </p>
+                </div>
+            }
+            
+            <div class="mt-5">
+                <h5>Common Timezone Examples:</h5>
+                <ul class="list-unstyled">
+                    <li><strong>CDT</strong> → <strong>Israel</strong>: 8 hours ahead</li>
+                    <li><strong>CDT</strong> → <strong>UK (GMT)</strong>: 6 hours ahead</li>
+                    <li><strong>CDT</strong> → <strong>Japan</strong>: 14 hours ahead</li>
+                    <li><strong>CDT</strong> → <strong>Australia (AEST)</strong>: 15 hours ahead</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
