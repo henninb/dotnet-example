@@ -1,12 +1,13 @@
+using human_module;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
+builder.Services.Configure<EnforcerConfig>(builder.Configuration.GetSection("HumanConfiguration"));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -16,12 +17,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-//app.Use(async (context, next) =>
-//{
-    // Do work that can write to the Response.
- //   await next.Invoke();
-    // Do logging or other work that doesn't write to the Response.
-//});
+app.UseHumanMiddleware();
 
 app.UseRouting();
 

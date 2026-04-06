@@ -167,11 +167,6 @@ publish/
 *.pubxml
 *.publishproj
 
-# Microsoft Azure Web App publish settings. Comment the next line if you want to
-# checkin your Azure Web App publish settings, but sensitive information contained
-# in these files may be visible to others.
-*.azurePubxml
-
 # Microsoft Azure Build Output
 csx/
 *.build.csdef
@@ -337,9 +332,18 @@ FodyWeavers.xsd
 # Azure Functions localsettings file
 local.settings.json
 
-# User secrets
+# User secrets (do not commit real secrets — use dotnet user-secrets, env vars, or Key Vault)
 *.secrets.json
 
-# Environment-specific configuration files with secrets
-appsettings.Development.json
-appsettings.Production.json
+# Local environment files (often contain secrets)
+.env
+.env.*
+!.env.example
+
+# Test output (coverage file patterns are listed under Coverlet / VS above)
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+
+# .NET CLI / tool caches
+.dotnet/

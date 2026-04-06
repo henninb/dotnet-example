@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Simple Web App</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://client.px-cloud.net; connect-src 'self' https://collector-PXjJ0cYtn9.px-cloud.net; img-src 'self' data:; style-src 'self' 'unsafe-inline';" />
 </head>
 <body>
     <header>
@@ -26,10 +27,10 @@
 
     <footer class="footer">
         <div class="container">
-            &copy; 2024 - Simple Web App
+            &copy; @DateTime.UtcNow.Year - Simple Web App
         </div>
     </footer>
-    <script src="//client.px-cloud.net/PXjJ0cYtn9/main.min.js" async></script>
+    <script src="https://client.px-cloud.net/PXjJ0cYtn9/main.min.js" async></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
