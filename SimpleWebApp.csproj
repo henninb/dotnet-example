@@ -4,6 +4,8 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Used by dotnet user-secrets and Development config; secrets are not stored in the repo -->
+    <UserSecretsId>9a52fd32-01e0-42fd-851e-da1e522e9786</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

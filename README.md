@@ -21,3 +21,10 @@ The application will be available at `https://localhost:5001` or `http://localho
 - About page with application information
 - Clean, responsive design
 - MVC architecture pattern
+
+
+~/.microsoft/usersecrets/<UserSecretsId>/secrets.json
+  dotnet user-secrets set "HumanConfiguration:px_app_id" "..."
+  dotnet user-secrets set "HumanConfiguration:px_cookie_secret" "..."
+  dotnet user-secrets set "HumanConfiguration:px_auth_token" "..."
+why not gopass
